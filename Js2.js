@@ -34,13 +34,10 @@ function addPerson() {
 }
 
 //Funckio jolla haetaan henkilön puhelinnumero
-function search(phonebook) {
-  let name = readline.question("Anna haettava nimi: ").toLowerCase(); // Muutetaan syöte pieniksi kirjaimiksi
+function search(phonebook, name) {
   for (let i = 0; i < phonebook.length; i++) {
     if (phonebook[i].name.toLowerCase() === name) {
-      // muutetaan ja verrataan luettelossa olevia nimiä pienillä
-      console.log("Puhelinnumero: " + phonebook[i].phone);
-      return;
+      return phonebook[i].phone;
     }
   }
   console.log("Henkilöä ei löytynyt.");
@@ -60,7 +57,9 @@ while (open) {
       addPerson();
       break;
     case "2":
-      search(phonebook);
+      let name = readline.question("Anna haettava nimi: ").toLowerCase();
+      let number = search(phonebook, name);
+      console.log(name + ", puhelinnumero: " + number);
       break;
     case "3":
       open = false;
